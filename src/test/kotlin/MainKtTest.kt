@@ -23,7 +23,7 @@ class MainKtTest {
         val transfer = 14_000_00
         val transferLast = 1_000_00
         val result = limit(transfer, "VK Pay", transferLast)
-        assertEquals("Комиссия составит 0,00 рублей", result)
+        assertEquals("Комиссия составит ${String.format("%.2f", 0.00)} рублей", result)
     }
 
     @Test
@@ -39,13 +39,13 @@ class MainKtTest {
         val transfer = 50_000_00
         val transferLast = 1_000_00
         val result = limit(transfer, "Maestro", transferLast)
-        assertEquals("Комиссия составит  0,00 рублей", result)
+        assertEquals("Комиссия составит  ${String.format("%.2f", 0.00)} рублей", result)
     }
 
     @Test
     fun limitCartBigTransfer() {
         val transfer = 151_000_00
-        var transferLast = 0
+        val transferLast = 0
         val result = limit(transfer, "Maestro", transferLast)
         assertEquals("Превышен суточный лимит на перевод через банковскую карту", result)
     }
@@ -55,7 +55,7 @@ class MainKtTest {
         val transfer = 150_000_00
         val transferLast = 0
         val result = limit(transfer, "Maestro", transferLast)
-        assertEquals("Комиссия составит  920,00 рублей", result)
+        assertEquals("Комиссия составит  ${String.format("%.2f", 920.00)} рублей", result)
     }
 
     @Test
